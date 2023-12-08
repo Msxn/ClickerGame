@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:clicker_game/models/resource.dart';
 
+//Controleur de tous les objets Resource
 class ResourceProvider extends ChangeNotifier {
   final List<Resource> _resources = [
     Resource(key: 'wood', name: 'Bois', color: '#967969', description: 'Du bois brut'),

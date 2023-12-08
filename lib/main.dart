@@ -5,6 +5,7 @@ import 'package:clicker_game/providers/recipes_provider.dart';
 import 'package:clicker_game/screens/resources_page.dart';
 import 'package:clicker_game/screens/mining_results_page.dart';
 
+//Page Main avec les Routes
 void main() {
   runApp(
     MultiProvider(

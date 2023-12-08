@@ -1,10 +1,12 @@
 import 'package:clicker_game/models/recipe.dart';
 
+//Objet Matière première (lingots, plaques, tiges...)
 class RawMaterial extends Recipe{
   final Set<String> unlockWhich;
   final int quantityPerCraft;
 
   RawMaterial({
+    required bool setActive,
     required String key,
     required String name,
     required Map<String, int> cost,
@@ -14,6 +16,7 @@ class RawMaterial extends Recipe{
     required this.unlockWhich,
     required this.quantityPerCraft,
   })  : super(
+          setActive: setActive,
           key: key,
           name: name,
           cost: cost,

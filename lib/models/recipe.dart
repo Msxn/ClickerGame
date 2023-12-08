@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 
+//Objet Recipe de base à étendre
 class Recipe extends ChangeNotifier {
+  final bool setActive;
   final String key;
   final String name;
   final Map<String, int> cost;
@@ -10,6 +12,7 @@ class Recipe extends ChangeNotifier {
   final ValueNotifier<int> quantity;
 
   Recipe({
+    required this.setActive,
     required this.key,
     required this.name,
     required this.cost,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:clicker_game/providers/resource_provider.dart';
 
+//Page d'affiche des résultats de minage sur les resources
 class MiningResultsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

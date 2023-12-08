@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 
+//Objet Resource de base
 class Resource extends ChangeNotifier {
   final String key;
   final String name;

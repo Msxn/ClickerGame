@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:clicker_game/providers/resource_provider.dart';
 import 'package:clicker_game/providers/recipes_provider.dart';
 
+//Widget Matière première à fabriquer
 class RawMatRecipeWidget extends StatelessWidget {
   final ResourceProvider resourceProvider;
   final RecipesProvider recipesProvider;
+  final Function(double) setParentHeight;
 
-  RawMatRecipeWidget({required this.resourceProvider, required this.recipesProvider});
+  RawMatRecipeWidget({required this.resourceProvider, required this.recipesProvider, required this.setParentHeight});
 
   String _buildCostString(Map<String, int> cost) {
     return cost.entries.map((entry) => "${entry.value} ${entry.key}").join(", ");
@@ -36,12 +38,13 @@ class RawMatRecipeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    setParentHeight((recipesProvider.getMaterials().length)*100.0);
     return ListView.builder(
       itemCount: recipesProvider.getMaterials().length,
       itemBuilder: (context, index) {
         RawMaterial recipe = recipesProvider.getMaterials()[index];
         return ListTile(
-          title: Text(recipe.name),
+          title: Text(recipe.name+" - "+recipe.key),
           subtitle: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:clicker_game/models/resource.dart';
 import 'package:clicker_game/models/tool.dart';
 import 'package:clicker_game/providers/resource_provider.dart';
 import 'package:clicker_game/providers/recipes_provider.dart';
 
+//Widget Outil à fabriquer
 class ToolRecipeWidget extends StatelessWidget {
   final ResourceProvider resourceProvider;
   final RecipesProvider recipesProvider;
+  final Function(double) setParentHeight;
 
-  ToolRecipeWidget({required this.resourceProvider, required this.recipesProvider});
+  ToolRecipeWidget({required this.resourceProvider, required this.recipesProvider, required this.setParentHeight});
 
   String _buildCostString(Map<String, int> cost) {
     return cost.entries.map((entry) => "${entry.value} ${entry.key}").join(", ");
@@ -36,12 +37,13 @@ class ToolRecipeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    setParentHeight((recipesProvider.getTools().length)*100.0);
     return ListView.builder(
       itemCount: recipesProvider.getTools().length,
       itemBuilder: (context, index) {
         Tool recipe = recipesProvider.getTools()[index];
         return ListTile(
-          title: Text(recipe.name),
+          title: Text(recipe.name+" - "+recipe.key),
           subtitle: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

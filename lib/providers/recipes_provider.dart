@@ -1,13 +1,17 @@
+import 'package:clicker_game/models/component.dart';
 import 'package:flutter/material.dart';
 import 'package:clicker_game/models/resource.dart';
 import 'package:clicker_game/models/recipe.dart';
 import 'package:clicker_game/models/rawmaterial.dart';
 import 'package:clicker_game/models/tool.dart';
 
+//Controlleur de tous les objets de type Recipe et ceux qui étendent cette classe
 class RecipesProvider extends ChangeNotifier{
   final List<Recipe> _recipes = 
   [
+    //Tools
     Tool(
+      setActive: true,
       key:'r_axe',
       name: 'Hache',
       cost: {'wood': 2, 'r_iron_stick': 2}, 
@@ -18,6 +22,7 @@ class RecipesProvider extends ChangeNotifier{
       activeInitialValue: false
     ),
     Tool(
+      setActive: true,
       key:'r_pickaxe',
       name: 'Pioche',
       cost: {'wood': 2, 'r_iron_stick': 3}, 
@@ -27,7 +32,9 @@ class RecipesProvider extends ChangeNotifier{
       craftAmount: {'iron_ore' : 5, "copper_ore" : 5},
       activeInitialValue: false
     ),
+    //Raw Materials
     RawMaterial(
+      setActive: true,
       key:'r_iron_ingot',
       name: 'Lingot de fer',
       cost: {'iron_ore': 1}, 
@@ -38,6 +45,7 @@ class RecipesProvider extends ChangeNotifier{
       quantityPerCraft: 1,
     ),
     RawMaterial(
+      setActive: true,
       key:'r_iron_plate',
       name: 'Plaque de fer',
       cost: {'iron_ore': 3}, 
@@ -48,15 +56,28 @@ class RecipesProvider extends ChangeNotifier{
       quantityPerCraft: 2,
     ),
     RawMaterial(
+      setActive: true,
       key:'r_iron_stick',
       name: 'Tige de fer',
       cost: {'r_iron_ingot': 1}, 
       gameplay: 'Débloque d\'autres recettes',
       type: 'Matériau',
       description: 'Une tige en metal',
-      unlockWhich: {'iron_stick'},
+      unlockWhich: {},
       quantityPerCraft: 1,
     ),
+    //Components
+    CompMaterial(
+      setActive: true,
+      key:'r_copper_line',
+      name: 'Fil électrique',
+      cost: {'r_iron_ingot': 1}, 
+      gameplay: 'Débloque d\'autres recettes',
+      type: 'Matériau',
+      description: 'Un fil électrique pour fabriquer des composants électroniques',
+      unlockWhich: {''},
+      quantityPerCraft: 1,
+    )
   ];
 
 
@@ -82,6 +103,16 @@ class RecipesProvider extends ChangeNotifier{
       }
     }
     return temporaryMatList;
+  }
+
+  List<CompMaterial> getComponents() {
+    List<CompMaterial> temporaryCompList = [];
+    for(Recipe component in getRecipes()){
+      if(component is CompMaterial){
+        temporaryCompList.add(component);
+      }
+    }
+    return temporaryCompList;
   }
 
 
@@ -118,7 +149,10 @@ class RecipesProvider extends ChangeNotifier{
         resource.craftAmount = value;
       }
     }
-    
+
+    if(recipe is CompMaterial){
+      recipe.incrementQuantity(recipe.quantityPerCraft);
+    }
 
   }
 }

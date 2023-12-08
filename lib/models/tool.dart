@@ -1,11 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:clicker_game/models/recipe.dart';
 
+//Objet Outil (Pioche, Hache...)
 class Tool extends Recipe{
   final Map<String, int> craftAmount;
   final ValueNotifier<bool> active;
 
   Tool({
+    required bool setActive,
     required String key,
     required String name,
     required Map<String, int> cost,
@@ -16,6 +18,7 @@ class Tool extends Recipe{
     required bool activeInitialValue,
   })  : active = ValueNotifier<bool>(activeInitialValue),
         super(
+          setActive: setActive,
           key: key,
           name: name,
           cost: cost,
